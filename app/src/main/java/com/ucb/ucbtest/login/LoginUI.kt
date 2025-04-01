@@ -8,13 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -31,9 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ucb.ucbtest.R
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun LoginUI() {
-
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var context = LocalContext.current
@@ -41,7 +39,7 @@ fun LoginUI() {
 
     val loginState by viewModel.loginState.collectAsState(LoginViewModel.LoginState.Init)
 
-    when ( loginState) {
+    when (loginState) {
         is LoginViewModel.LoginState.Init -> {
             Toast.makeText(context, "Init", Toast.LENGTH_LONG).show()
         }
@@ -53,25 +51,22 @@ fun LoginUI() {
         }
         is LoginViewModel.LoginState.Loading -> {
             Toast.makeText(context, "Loading....", Toast.LENGTH_LONG).show()
-
         }
     }
 
-    Scaffold {
-        innerPadding ->
-        Box( modifier = Modifier.padding(innerPadding).fillMaxSize().padding(10.dp)) {
+    Scaffold { innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding).fillMaxSize().padding(10.dp)) {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Icon(
-                    painter = painterResource(id =  R.drawable.ic_launcher_background),
-                    contentDescription = ""
-
+                    painter = painterResource(id = R.drawable.ic_launcher_background),
+                    contentDescription = "",
                 )
                 Text(
-                    stringResource(id = R.string.login_title)
+                    stringResource(id = R.string.login_title),
                 )
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
@@ -81,7 +76,7 @@ fun LoginUI() {
                     },
                     label = {
                         Text("Username")
-                    }
+                    },
                 )
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
@@ -92,23 +87,22 @@ fun LoginUI() {
                     label = {
                         Text("Password")
                     },
-                    visualTransformation = PasswordVisualTransformation()
-
+                    visualTransformation = PasswordVisualTransformation(),
                 )
                 Box(
-                    modifier = Modifier.height(70.dp)
-                        .padding(0.dp,10.dp)
+                    modifier =
+                        Modifier
+                            .height(70.dp)
+                            .padding(0.dp, 10.dp),
                 ) {
                     OutlinedButton(
                         modifier = Modifier.fillMaxSize(),
                         onClick = {
                             viewModel.doLogin(username, password)
-                        }
+                        },
                     ) { Text("login") }
                 }
-
             }
-
         }
     }
 }

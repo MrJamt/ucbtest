@@ -1,7 +1,6 @@
 package com.ucb.ucbtest.gitalias
 
 import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,20 +24,22 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.ucb.ucbtest.R
-import dagger.hilt.android.AndroidEntryPoint
 
 @Composable
-fun GitaliasUI(viewModel : GitaliasViewModel = viewModel() ) {
+fun GitaliasUI(viewModel: GitaliasViewModel = viewModel()) {
     var alias by remember { mutableStateOf("") }
 
     val gitaliasState by viewModel.flow.collectAsState()
 
     Box(
-        modifier = Modifier.fillMaxSize()
-            .padding(10.dp),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(10.dp),
+        contentAlignment = Alignment.Center,
     ) {
-        Column( horizontalAlignment = Alignment.CenterHorizontally
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
@@ -48,23 +49,23 @@ fun GitaliasUI(viewModel : GitaliasViewModel = viewModel() ) {
                 },
                 label = {
                     Text(stringResource(id = R.string.gitalias_input))
-                }
+                },
             )
             OutlinedButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
                     viewModel.fetchGitalias(alias)
-                }
+                },
             ) {
                 Text(stringResource(id = R.string.gitalias_btn_find))
             }
-            when( val state = gitaliasState) {
+            when (val state = gitaliasState) {
                 is GitaliasViewModel.GitaliasState.Init -> {
                     Text("Not image yet")
                 }
                 is GitaliasViewModel.GitaliasState.Successful -> {
                     Text("${state.model.login}")
-                    Log.d("calyr","${state.model.avatarUrl}" )
+                    Log.d("calyr", "${state.model.avatarUrl}")
                     AsyncImage(
                         model = state.model.avatarUrl,
                         contentDescription = null,
@@ -72,6 +73,8 @@ fun GitaliasUI(viewModel : GitaliasViewModel = viewModel() ) {
                         contentScale = ContentScale.Crop,
                     )
                 }
+
+                is GitaliasViewModel.GitaliasState.Error -> TODO()
             }
         }
     }
