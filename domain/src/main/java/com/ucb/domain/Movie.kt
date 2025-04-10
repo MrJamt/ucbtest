@@ -1,10 +1,10 @@
 package com.ucb.domain
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Movie(
-    val id: Int,
     val title: String,
+    val posterPath: String,
     val overview: String,
-    val poster_path: String,
-    val release_date: String,
-    val vote_average: Double,
 )

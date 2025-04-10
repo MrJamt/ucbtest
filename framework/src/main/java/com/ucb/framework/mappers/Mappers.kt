@@ -22,12 +22,7 @@ fun GitAccount.toModel(): Gitalias =
 
 fun MovieDto.toModel(): Movie =
     Movie(
-        id = id,
         title = title,
         overview = overview,
-        poster_path = "https://image.tmdb.org/t/p/w185$poster_path",
-        release_date = release_date,
-        vote_average = vote_average,
+        posterPath = posterPath,
     )
-
-fun List<MovieDto>.toModelList(): List<Movie> = map { it.toModel() }

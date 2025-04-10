@@ -7,4 +7,6 @@
     <string name="gitalias_btn_find">Find</string>
     <string name="internet_conection_error">No tiene conexión a Internet</string>
     <string name="btn_take_photo">Take photo</string>
+    <string name="movie_list">Movie List</string>
+    <string name="token">fa3e844ce31744388e07fa47c7c5d8c3</string>
 </resources>

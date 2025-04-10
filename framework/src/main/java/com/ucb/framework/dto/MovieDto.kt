@@ -4,9 +4,9 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-class MovieResponseDto(
-    @Json(name = "page")
-    val page: Int,
-    @Json(name = "results")
-    val results: List<MovieDto>,
+data class MovieDto(
+    val title: String,
+    val overview: String,
+    @Json(name = "poster_path")
+    val posterPath: String,
 )
