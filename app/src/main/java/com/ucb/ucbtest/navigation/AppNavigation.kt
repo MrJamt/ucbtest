@@ -14,6 +14,7 @@ import com.ucb.ucbtest.gitalias.GitaliasUI
 import com.ucb.ucbtest.login.LoginUI
 import com.ucb.ucbtest.movie.MoviesUI
 import com.ucb.ucbtest.moviedetail.MovieDetailUI
+import com.ucb.ucbtest.notification.NotificacionUI
 import com.ucb.ucbtest.takephoto.TakePhotoUI
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -26,7 +27,7 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.MoviesScreen.route,
+        startDestination = Screen.NotificationScreen.route,
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },
@@ -82,6 +83,10 @@ fun AppNavigation() {
 
         composable(Screen.CounterScreen.route) {
             CounterUI()
+        }
+
+        composable(Screen.NotificationScreen.route) {
+            NotificacionUI()
         }
     }
 }

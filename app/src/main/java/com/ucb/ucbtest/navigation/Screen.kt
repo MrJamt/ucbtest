@@ -16,4 +16,6 @@ sealed class Screen(
     object MovieDetailScreen : Screen("movieDetail")
 
     object CounterScreen : Screen("counter")
+
+    object NotificationScreen : Screen("notification_screen")
 }
