@@ -6,5 +6,5 @@ import com.ucb.domain.Income
 class GetAllIncomes(
     private val incomeRepository: IncomeRepository,
 ) {
-    suspend operator fun invoke(): List<Income> = incomeRepository.getIncomes()
+    suspend fun invoke(): List<Income> = incomeRepository.getIncomes()
 }

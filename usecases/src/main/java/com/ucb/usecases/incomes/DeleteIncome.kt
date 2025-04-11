@@ -6,5 +6,5 @@ import com.ucb.domain.Income
 class DeleteIncome(
     private val incomeRepository: IncomeRepository,
 ) {
-    suspend operator fun invoke(income: Income) = incomeRepository.deleteIncome(income)
+    suspend fun invoke(income: Income) = incomeRepository.deleteIncome(income)
 }

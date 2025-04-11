@@ -18,4 +18,6 @@ sealed class Screen(
     object CounterScreen : Screen("counter")
 
     object NotificationScreen : Screen("notification_screen")
+
+    object ExpenseIncomeScreen : Screen("expense_income_screen")
 }

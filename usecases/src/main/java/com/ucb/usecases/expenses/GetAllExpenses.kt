@@ -6,5 +6,5 @@ import com.ucb.domain.Expense
 class GetAllExpenses(
     private val expenseRepository: ExpenseRepository,
 ) {
-    suspend operator fun invoke(): List<Expense> = expenseRepository.getExpenses()
+    suspend fun invoke(): List<Expense> = expenseRepository.getExpenses()
 }

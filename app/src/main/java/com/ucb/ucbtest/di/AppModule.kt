@@ -5,7 +5,10 @@ import com.ucb.data.GithubRepository
 import com.ucb.data.MovieRepository
 import com.ucb.data.git.IGitRemoteDataSource
 import com.ucb.data.git.ILocalDataSource
+import com.ucb.data.income.IIncomeLocalDataSource
+import com.ucb.data.income.IncomeRepository
 import com.ucb.data.movie.IMovieRemoteDataSource
+import com.ucb.framework.datasource.IncomeLocalDataSource
 import com.ucb.framework.github.GithubLocalDataSource
 import com.ucb.framework.github.GithubRemoteDataSource
 import com.ucb.framework.movie.MovieRemoteDataSource
@@ -14,6 +17,9 @@ import com.ucb.ucbtest.R
 import com.ucb.usecases.FindGitAlias
 import com.ucb.usecases.GetPopularMovies
 import com.ucb.usecases.SaveGitalias
+import com.ucb.usecases.incomes.DeleteIncome
+import com.ucb.usecases.incomes.GetAllIncomes
+import com.ucb.usecases.incomes.RegisterIncome
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -72,4 +78,26 @@ object AppModule {
     @Provides
     @Singleton
     fun provideMovieRemoteDataSource(retrofit: RetrofitBuilder): IMovieRemoteDataSource = MovieRemoteDataSource(retrofit)
+
+    @Provides
+    @Singleton
+    fun provideIncomeLocalDataSource(
+        @ApplicationContext context: Context,
+    ): IIncomeLocalDataSource = IncomeLocalDataSource(context)
+
+    @Provides
+    @Singleton
+    fun incomeRepository(incomeLocalDataSource: IIncomeLocalDataSource): IncomeRepository = IncomeRepository(incomeLocalDataSource)
+
+    @Provides
+    @Singleton
+    fun provideRegisterIncome(incomeRepository: IncomeRepository): RegisterIncome = RegisterIncome(incomeRepository)
+
+    @Provides
+    @Singleton
+    fun provideGetAllIncomes(incomeRepository: IncomeRepository): GetAllIncomes = GetAllIncomes(incomeRepository)
+
+    @Provides
+    @Singleton
+    fun provideDeleteIncome(incomeRepository: IncomeRepository): DeleteIncome = DeleteIncome(incomeRepository)
 }

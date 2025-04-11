@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.ucb.domain.Movie
 import com.ucb.ucbtest.counter.CounterUI
+import com.ucb.ucbtest.expenseincome.ExpenseIncomeUI
 import com.ucb.ucbtest.gitalias.GitaliasUI
 import com.ucb.ucbtest.login.LoginUI
 import com.ucb.ucbtest.movie.MoviesUI
@@ -21,13 +22,14 @@ import kotlinx.serialization.json.Json
 import java.net.URLDecoder
 import java.net.URLEncoder
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
-        startDestination = Screen.NotificationScreen.route,
+        startDestination = Screen.ExpenseIncomeScreen.route,
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None },
         popEnterTransition = { EnterTransition.None },
@@ -87,6 +89,10 @@ fun AppNavigation() {
 
         composable(Screen.NotificationScreen.route) {
             NotificacionUI()
+        }
+
+        composable(Screen.ExpenseIncomeScreen.route) {
+            ExpenseIncomeUI()
         }
     }
 }
