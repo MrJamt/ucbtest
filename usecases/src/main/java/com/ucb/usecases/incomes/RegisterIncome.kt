@@ -1,4 +1,4 @@
-package com.ucb.usecases
+package com.ucb.usecases.incomes
 
 import com.ucb.domain.Income
 
