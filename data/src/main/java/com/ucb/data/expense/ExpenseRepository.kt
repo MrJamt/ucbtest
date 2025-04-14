@@ -3,11 +3,11 @@ package com.ucb.data.expense
 import com.ucb.domain.Expense
 
 class ExpenseRepository(
-    private val localDataSource: IExpenseLocalDataSource,
+    val expenseLocalDataSource: IExpenseLocalDataSource,
 ) {
-    suspend fun saveExpense(expense: Expense): Boolean = localDataSource.saveExpense(expense)
+    suspend fun saveExpense(expense: Expense): Boolean = this.expenseLocalDataSource.saveExpense(expense)
 
-    suspend fun getExpenses(): List<Expense> = localDataSource.getExpenses()
+    suspend fun getExpenses(): List<Expense> = this.expenseLocalDataSource.getExpenses()
 
-    suspend fun deleteExpense(expense: Expense) = localDataSource.deleteExpense(expense)
+    suspend fun deleteExpense(expense: Expense) = this.expenseLocalDataSource.deleteExpense(expense)
 }

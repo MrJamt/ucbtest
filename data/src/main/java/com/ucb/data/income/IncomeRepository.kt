@@ -3,11 +3,11 @@ package com.ucb.data.income
 import com.ucb.domain.Income
 
 class IncomeRepository(
-    private val localDataSource: IIncomeLocalDataSource,
+    val incomeLocalDataSource: IIncomeLocalDataSource,
 ) {
-    suspend fun saveIncome(income: Income): Boolean = localDataSource.saveIncome(income)
+    suspend fun saveIncome(income: Income): Boolean = this.incomeLocalDataSource.saveIncome(income)
 
-    suspend fun getIncomes(): List<Income> = localDataSource.getIncomes()
+    suspend fun getIncomes(): List<Income> = this.incomeLocalDataSource.getIncomes()
 
-    suspend fun deleteIncome(income: Income) = localDataSource.deleteIncome(income)
+    suspend fun deleteIncome(income: Income) = this.incomeLocalDataSource.deleteIncome(income)
 }

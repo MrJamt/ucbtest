@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.ucb.domain.Expense
 import com.ucb.domain.Income
 import com.ucb.ucbtest.expenseincome.expense.ExpenseViewModel
@@ -25,8 +25,8 @@ import com.ucb.ucbtest.expenseincome.income.IncomeViewModel
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun ExpenseIncomeUI(
-    expenseViewModel: ExpenseViewModel = viewModel(),
-    incomeViewModel: IncomeViewModel = viewModel(),
+    expenseViewModel: ExpenseViewModel = hiltViewModel(),
+    incomeViewModel: IncomeViewModel = hiltViewModel(),
 ) {
     LaunchedEffect(Unit) {
         expenseViewModel.loadExpenses()

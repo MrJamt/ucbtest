@@ -9,11 +9,14 @@ import com.ucb.framework.room.AppDatabase
 import com.ucb.framework.room.dao.ExpenseDao
 
 class ExpenseLocalDataSource(
-    context: Context,
+    val context: Context,
 ) : IExpenseLocalDataSource {
     val expenseDao: ExpenseDao = AppDatabase.getDatabase(context).expenseDao()
 
-    override suspend fun saveExpense(expense: Expense): Boolean = expenseDao.insert(expense.toEntity()) > 0
+    override suspend fun saveExpense(expense: Expense): Boolean {
+        expenseDao.insert(expense.toEntity()) > 0
+        return true
+    }
 
     override suspend fun getExpenses(): List<Expense> = expenseDao.getAll().map { it.toModel() }
 

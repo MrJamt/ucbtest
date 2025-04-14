@@ -9,11 +9,14 @@ import com.ucb.framework.room.AppDatabase
 import com.ucb.framework.room.dao.IncomeDao
 
 class IncomeLocalDataSource(
-    context: Context,
+    val context: Context,
 ) : IIncomeLocalDataSource {
     val incomeDao: IncomeDao = AppDatabase.getDatabase(context).incomeDao()
 
-    override suspend fun saveIncome(income: Income): Boolean = incomeDao.insert(income.toEntity()) > 0
+    override suspend fun saveIncome(income: Income): Boolean {
+        incomeDao.insert(income.toEntity()) > 0
+        return true
+    }
 
     override suspend fun getIncomes(): List<Income> = incomeDao.getAll().map { it.toModel() }
 

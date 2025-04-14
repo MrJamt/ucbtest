@@ -3,11 +3,14 @@ package com.ucb.ucbtest.di
 import android.content.Context
 import com.ucb.data.GithubRepository
 import com.ucb.data.MovieRepository
+import com.ucb.data.expense.ExpenseRepository
+import com.ucb.data.expense.IExpenseLocalDataSource
 import com.ucb.data.git.IGitRemoteDataSource
 import com.ucb.data.git.ILocalDataSource
 import com.ucb.data.income.IIncomeLocalDataSource
 import com.ucb.data.income.IncomeRepository
 import com.ucb.data.movie.IMovieRemoteDataSource
+import com.ucb.framework.datasource.ExpenseLocalDataSource
 import com.ucb.framework.datasource.IncomeLocalDataSource
 import com.ucb.framework.github.GithubLocalDataSource
 import com.ucb.framework.github.GithubRemoteDataSource
@@ -17,6 +20,9 @@ import com.ucb.ucbtest.R
 import com.ucb.usecases.FindGitAlias
 import com.ucb.usecases.GetPopularMovies
 import com.ucb.usecases.SaveGitalias
+import com.ucb.usecases.expenses.DeleteExpense
+import com.ucb.usecases.expenses.GetAllExpenses
+import com.ucb.usecases.expenses.RegisterExpense
 import com.ucb.usecases.incomes.DeleteIncome
 import com.ucb.usecases.incomes.GetAllIncomes
 import com.ucb.usecases.incomes.RegisterIncome
@@ -87,7 +93,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun incomeRepository(incomeLocalDataSource: IIncomeLocalDataSource): IncomeRepository = IncomeRepository(incomeLocalDataSource)
+    fun provideIncomeRepository(incomeLocalDataSource: IIncomeLocalDataSource): IncomeRepository = IncomeRepository(incomeLocalDataSource)
 
     @Provides
     @Singleton
@@ -100,4 +106,27 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDeleteIncome(incomeRepository: IncomeRepository): DeleteIncome = DeleteIncome(incomeRepository)
+
+    @Provides
+    @Singleton
+    fun provideExpenseLocalDataSource(
+        @ApplicationContext context: Context,
+    ): IExpenseLocalDataSource = ExpenseLocalDataSource(context)
+
+    @Provides
+    @Singleton
+    fun provideExpenseRepository(expenseLocalDataSource: IExpenseLocalDataSource): ExpenseRepository =
+        ExpenseRepository(expenseLocalDataSource)
+
+    @Provides
+    @Singleton
+    fun provideRegisterExpense(expenseRepository: ExpenseRepository): RegisterExpense = RegisterExpense(expenseRepository)
+
+    @Provides
+    @Singleton
+    fun provideGelAllExpense(expenseRepository: ExpenseRepository): GetAllExpenses = GetAllExpenses(expenseRepository)
+
+    @Provides
+    @Singleton
+    fun provideDeleteExpense(expenseRepository: ExpenseRepository): DeleteExpense = DeleteExpense(expenseRepository)
 }
